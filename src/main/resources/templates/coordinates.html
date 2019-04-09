@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>Zombie Coordinates</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+
+<body>
+<p>Current position of the zombie:</p>
+<p th:text="'xlabel: ' + ${zombie.xlabel} +', ylabel: ' + ${zombie.ylabel}"></p>
+<p th:text="'Zombie message: ' + ${zombie.message}"></p>
+</body>
+</html>

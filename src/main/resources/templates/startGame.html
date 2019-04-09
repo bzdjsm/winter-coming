@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <title>Game Starts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p style="font-size:20px">Game Starts!</p>
+<p style="color:blue">Game Rules:</p>
+<p>Zombie starts at (Random,0) and heads to wall. Zombie will win if it reaches (Random,30). It will move to the wall by 1 every 2 seconds,
+    and the x-label of it will always be a random number between 0 and 9. Your goal is to kill it before it reaches the wall.</p>
+
+<input id="label1" type="number" min="0" max="9" value="0" required="required"></input>
+<input id="label2" type="number" min="0" max="29" value="0" required="required"></input>
+<input id="num" type="hidden" th:value="${num}"></input>
+<button onclick="shootZombie()">click to shoot</button>
+<button onclick="restart()">click to restart</button>
+<!--<button onclick="check()">click to check coordinates</button>-->
+<p>Zombie's coordinates:</p>
+<p id = "coordinate"></p>
+<script>
+    function restart() {
+        var url = "http://localhost:8080/wintercoming/start";
+        var form = document.createElement("form");
+        form.action = url;
+        form.method = "get";
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function shootZombie(){
+
+        var xlabel = document.getElementById("label1").value;
+        var ylabel = document.getElementById("label2").value;
+        var num = document.getElementById("num").value;;
+
+        var url = "http://localhost:8080/wintercoming/shoot";
+        var a = "&;";
+        var str = url + "?xlabel=" + xlabel + a.substring(0,1) + "ylabel=" + ylabel + a.substring(0,1) + "num=" + num;
+        var form = document.createElement("form");
+        form.action = str;
+        form.method = "post";
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+
+    function check()
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var num = document.getElementById("num").value;;
+        xmlhttp.open("POST","/wintercoming/check",true);
+        xmlhttp.responseType = 'text';
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.send("num="+num);
+        xmlhttp.onreadystatechange=function()
+        {
+            if(xmlhttp.readyState == 4)
+            {
+                if(xmlhttp.status==200)
+                {
+                    document.getElementById("coordinate").innerHTML=this.responseText;
+                }
+            }
+        }
+    }
+
+    setInterval(check, 2000);
+</script>
+
+</body>
+</html>

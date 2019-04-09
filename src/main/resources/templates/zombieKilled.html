@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>You Win</title>
+</head>
+<body>
+<p>You killed the zombie successfully, Congratulation!</p>
+<button onclick="restart()">click to restart</button>
+<script>
+    function restart() {
+        var url = "http://localhost:8080/wintercoming/start";
+        var form = document.createElement("form");
+        form.action = url;
+        form.method = "get";
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+</body>
+</html>
