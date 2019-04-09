@@ -73,18 +73,6 @@ public class HomeController {
     @RequestMapping(value = "/check")
     @ResponseBody
     public String check(@RequestParam(value = "num", required = true) int num) {
-//
-//        map.put("message1", "Hello, Spring Boot!");
-//
-//        map.put("message2", "Hello, Spring Boot!");
-//        if(zombie == null) {
-//            zombie = new ZombieVo(-1, -1, "not start");
-//            //return zombie;
-//        } else {
-//            //return zombie;
-//        }
-//        map.put("zombie", zombie);
-//        return "coordinates";
         if(num >= size) {
             return "not start";
         }
